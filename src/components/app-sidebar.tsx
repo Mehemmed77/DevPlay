@@ -20,12 +20,14 @@ import { Folder } from "lucide-react";
 import { FileCode } from "lucide-react";
 import { AppWindow } from "lucide-react";
 import { MessageSquare } from "lucide-react";
+import { Search } from 'lucide-react';
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Send } from "lucide-react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar variant="floating" {...props}>
+      {/* HEADER */}
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -39,13 +41,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <span className="">v1.0.0</span>
                 </div>
               </a>
-            </SidebarMenuButton>
+            </SidebarMenuButton>  
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
+
+            {/* SEARCH AND FILES SECTION */}
             <SidebarMenuButton className="cursor-pointer">
               <div className="flex gap-2 items-center">
                 <Files size={"20px"} />
@@ -54,8 +58,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarMenuButton>
 
             <SidebarMenuItem className="mt-0.5">
-              <div>
-                <Input placeholder="Search files..."></Input>
+              <div className="relative w-full max-w-sm">
+                <Input type="text" placeholder="Search files..."></Input>
+                <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
               </div>
             </SidebarMenuItem>
 
@@ -91,6 +96,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
             <Separator />
 
+            {/* PARTICIPANTS SECTION */}
             <SidebarMenuItem>
               <SidebarMenuButton className="cursor-pointer">
                 <Users className="size-4" />
@@ -145,6 +151,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
             <Separator />
 
+            {/* CHAT SECTION */}
             <SidebarMenuItem>
               <SidebarMenuButton className="cursor-pointer">
                 <MessageSquare className="size-4" />
@@ -163,33 +170,41 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       className="rounded-full object-cover"
                     />
                   </div>
-                  <span className="text-sm"> Salamam</span>
+                  <span className="text-sm"> aaa</span>
+                </div>
+                <div className="flex gap-2 items-center mt-2">
+                  <div className="w-5 h-5 relative flex-shrink-0">
+                    <Image
+                      src="/dummy.avif"
+                      alt="User image"
+                      fill
+                      className="rounded-full object-cover"
+                    />
+                  </div>
+                  <span className="text-sm"> aaa</span>
+                </div>
+                <div className="flex gap-2 items-center mt-2">
+                  <div className="w-5 h-5 relative flex-shrink-0">
+                    <Image
+                      src="/dummy.avif"
+                      alt="User image"
+                      fill
+                      className="rounded-full object-cover"
+                    />
+                  </div>
+                  <span className="text-sm"> aaa</span>
                 </div>
               </div>
             </SidebarMenuItem>
+
+            <SidebarMenuItem>
+              <div className="mt-2 relative w-full max-w-sm">
+                <Input type="text" placeholder="Message #devplay" className="pr-10">
+                </Input>
+                <Send className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+              </div>
+            </SidebarMenuItem>
           </SidebarMenu>
-          {/* <SidebarMenu className="gap-2">
-            {data.navMain.map((item) => (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild>
-                  <a href={item.url} className="font-medium">
-                    {item.title}
-                  </a>
-                </SidebarMenuButton>
-                {item.items?.length ? (
-                  <SidebarMenuSub className="ml-0 border-l-0 px-1.5">
-                    {item.items.map((item) => (
-                      <SidebarMenuSubItem key={item.title}>
-                        <SidebarMenuSubButton asChild isActive={item.isActive}>
-                          <a href={item.url}>{item.title}</a>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                ) : null}
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu> */}
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>

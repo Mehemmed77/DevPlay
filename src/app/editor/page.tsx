@@ -1,12 +1,12 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
-import Sidebar from "./sidebar";
+import { AppSidebar } from "./components";
+
 
 export default function Page() {
     return <>
         <SidebarProvider>
-            <Sidebar />
+            <AppSidebar />
             <div>
-                sdjsj
             </div>
         </SidebarProvider>
     </>
