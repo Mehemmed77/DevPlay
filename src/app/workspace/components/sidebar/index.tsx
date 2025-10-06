@@ -21,7 +21,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
-
             {/* SEARCH AND FILES SECTION */}
             <SidebarFilesSection />
 
@@ -34,7 +33,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
             {/* CHAT SECTION */}
             <SidebarChatSection />
-
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
