@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileCode } from "lucide-react";
+import CodeEditor from "../editor/code-editor";
 
 export default function FileTabs() {
   return (
@@ -27,9 +28,15 @@ export default function FileTabs() {
             </TabsTrigger>
           </TabsList>
         </div>
-        <TabsContent value="index.js">AAAA</TabsContent>
-        <TabsContent value="server.js">AAAAA</TabsContent>
-        <TabsContent value="Readme.md">AAAAAA</TabsContent>
+        <TabsContent value="index.js">
+          <CodeEditor language="javascript" />
+        </TabsContent>
+        <TabsContent value="server.js">
+          <CodeEditor language="python" />
+        </TabsContent>
+        <TabsContent value="Readme.md">
+          <CodeEditor language="markdown" />
+        </TabsContent>
       </Tabs>
     </div>
   );
