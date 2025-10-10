@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model snapshot {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String     @db.VarChar(255)
+  content     Json?      @default("{}")
+  workspaceid String?    @db.Uuid
+  createdat   DateTime?  @default(now()) @db.Timestamptz(6)
+  authorid    String?    @db.Uuid
+  users       users?     @relation(fields: [authorid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  workspace   workspace? @relation(fields: [workspaceid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+  
+model users {
+  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username        String            @unique @db.VarChar(255)
+  password        String            @db.VarChar(255)
+  avatarurl       String?
+  createdat       DateTime?         @default(now()) @db.Timestamptz(6)
+  updatedat       DateTime?         @default(now()) @db.Timestamptz(6)
+  snapshot        snapshot[]
+  workspace       workspace[]
+  workspacemember workspacemember[]
+}
+
+model workspace {
+  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name            String            @db.VarChar(255)
+  description     String?
+  ispublic        Boolean?          @default(true)
+  createdat       DateTime?         @default(now()) @db.Timestamptz(6)
+  updatedat       DateTime?         @default(now()) @db.Timestamptz(6)
+  ownerid         String?           @db.Uuid
+  snapshot        snapshot[]
+  users           users?            @relation(fields: [ownerid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  workspacemember workspacemember[]
+}
+
+model workspacemember {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  role        String     @db.VarChar(255)
+  workspaceid String?    @db.Uuid
+  joinedat    DateTime?  @db.Timestamptz(6)
+  userid      String?    @db.Uuid
+  users       users?     @relation(fields: [userid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  workspace   workspace? @relation(fields: [workspaceid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
