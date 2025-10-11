@@ -9,7 +9,7 @@ import {
   SidebarMenu,
 } from "@/components/ui/sidebar";
 import SidebarFilesSection from "./sidebar-files.section";
-import SidebarUsersSection from "./sidebar-users-section";
+import SidebarUsersSection from "./sidebar-users-section/ui";
 import SidebarChatSection from "./sidebar-chat-section";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
