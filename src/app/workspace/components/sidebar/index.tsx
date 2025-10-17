@@ -8,9 +8,9 @@ import {
   SidebarHeader,
   SidebarMenu,
 } from "@/components/ui/sidebar";
-import SidebarFilesSection from "./sidebar-files.section";
 import SidebarUsersSection from "./sidebar-users-section/index";
-import SidebarChatSection from "./sidebar-chat-section";
+import SidebarFilesSection from "./sidebar-files-section/index";
+import SidebarChatSection from "./sidebar-chat-section/index";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -33,6 +33,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
             {/* CHAT SECTION */}
             <SidebarChatSection />
+
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>

@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Send, ChevronUp, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
-export default function SidebarChatSection() {
+export default function SidebarChatSectionUI() {
   const [open, setOpen] = useState<boolean>(true);
 
   const handleClick = () => setOpen((prev) => !prev);

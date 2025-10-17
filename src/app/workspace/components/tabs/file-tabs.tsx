@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileCode } from "lucide-react";
+import { FileCode, CirclePlus, FolderPlus } from "lucide-react";
 import CodeEditor from "../editor/code-editor";
+import AddFileFolderDialog from "./add-file-folder-dialog";
 
 export default function FileTabs() {
   return (
@@ -8,6 +9,7 @@ export default function FileTabs() {
       <Tabs defaultValue="index.js">
         <div className="border-solid border-gray-200 border-t border-b p-2">
           <TabsList>
+            <AddFileFolderDialog />
             <TabsTrigger value="index.js" className="cursor-pointer">
               <div className="flex gap-2 items-center">
                 <FileCode />

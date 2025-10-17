@@ -37,25 +37,44 @@ export default function CodeEditor({ language }: CodeEditorInterface) {
   }, [language, monacoInstance]);
 
   return (
-    <MonacoEditor
-      height="400px"
-      defaultLanguage={language}
-      defaultValue={`// ${language} code`}
-      theme="vs-dark"
-      options={{
-        minimap: { enabled: false },
-        automaticLayout: true,
-        fontSize: 14,
+    <div
+      style={{
+        border: "1px solid #444",
+        borderRadius: "10px",
+        overflow: "hidden",
+        padding: "8px",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+        // backgroundColor: "#1e1e1e",
       }}
-      onMount={(editor) => (editorRef.current = editor)}
-    />
+    >
+      <MonacoEditor
+        height="400px"
+        defaultLanguage={language}
+        defaultValue={`// ${language} code`}
+        theme="vs"
+        options={{
+          minimap: { enabled: false },
+          automaticLayout: true,
+          fontSize: 14,
+          lineNumbers: "on",
+          roundedSelection: true,
+          scrollBeyondLastLine: false,
+          renderLineHighlight: "all",
+          padding: { top: 10, bottom: 10 },
+        }}
+        onMount={(editor) => (editorRef.current = editor)}
+      />
+    </div>
   );
 }
 
 /**
  * Dynamically load Monaco language via AMD loader
  */
-async function loadLanguage(monaco: typeof import("monaco-editor"), language: string) {
+async function loadLanguage(
+  monaco: typeof import("monaco-editor"),
+  language: string
+) {
   if (loadedLanguageCache.has(language)) return;
 
   try {
@@ -66,14 +85,16 @@ async function loadLanguage(monaco: typeof import("monaco-editor"), language: st
           vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.49.0/min/vs",
         },
       });
-      (window as any).require([
-        `vs/basic-languages/${language}/${language}`,
-      ], (mod: any) => {
-        monaco.languages.register({ id: language });
-        monaco.languages.setMonarchTokensProvider(language, mod.language);
-        loadedLanguageCache.set(language, true);
-        resolve();
-      }, reject);
+      (window as any).require(
+        [`vs/basic-languages/${language}/${language}`],
+        (mod: any) => {
+          monaco.languages.register({ id: language });
+          monaco.languages.setMonarchTokensProvider(language, mod.language);
+          loadedLanguageCache.set(language, true);
+          resolve();
+        },
+        reject
+      );
     });
   } catch (err) {
     console.warn(`Could not load language "${language}":`, err);

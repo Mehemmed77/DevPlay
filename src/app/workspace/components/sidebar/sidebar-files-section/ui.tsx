@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Folder, FileCode, Search, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 
-export default function SidebarFilesSection() {
+export default function SidebarFilesSectionUI() {
   const [open, setOpen] = useState<boolean>(true);
 
   const handleClick = () => setOpen(prev => !prev);

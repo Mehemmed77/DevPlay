@@ -17,8 +17,6 @@ export default function SidebarUsersSectionUI({
 
   const handleClick = () => setOpen((prev) => !prev);
 
-  console.log(participants);
-
   return (
     <>
       <SidebarMenuItem>
@@ -40,7 +38,7 @@ export default function SidebarUsersSectionUI({
       {open && (
         <>
           {participants.map((p) => (
-            <SidebarMenuItem>
+            <SidebarMenuItem key={p.id}>
               <SidebarMenuButton className="cursor-pointer">
                 <div className="flex gap-2 items-center">
                   <div className="w-5 h-5 relative flex-shrink-0">
